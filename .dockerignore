@@ -1,0 +1,5 @@
+.git
+.run
+backend/.run
+bin
+**/*.log
