@@ -6,6 +6,8 @@ type Account struct {
 	Password     string `json:"-"`
 	Token        string `json:"-"`
 	RefreshToken string `json:"-"`
+	AvatarURL    string `gorm:"type:varchar(512)" json:"avatar_url,omitempty"`
+	Bio          string `gorm:"type:varchar(255)" json:"bio,omitempty"`
 }
 
 type CreateAccountRequest struct {
@@ -35,4 +37,18 @@ type LoginResponse struct {
 
 type RefreshRequest struct {
 	RefreshToken string `json:"refresh_token"`
+}
+
+type RenameRequest struct {
+	NewUsername string `json:"new_username"`
+}
+type UpdateProfileRequest struct {
+	AvatarURL string `json:"avatar_url"`
+	Bio       string `json:"bio"`
+}
+
+type ChangePasswordRequest struct {
+	Username    string `json:"username"`
+	OldPassword string `json:"old_password"`
+	NewPassword string `json:"new_password"`
 }

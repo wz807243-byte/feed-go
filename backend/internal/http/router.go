@@ -18,7 +18,9 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ) *g
 	}
 	r.GET("/healthz", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
+
 	})
+	r.Static("/static", "./.run/uploads")
 
 	accountRepository := account.NewAccountRepository(db)
 	accountService := account.NewAccountService(accountRepository)
@@ -31,6 +33,8 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ) *g
 	protectedAccount := accountGroup.Group("")
 	protectedAccount.Use(jwt.JWTAuth(accountRepository, cache))
 	protectedAccount.POST("/logout", accountHandler.Logout)
+	protectedAccount.POST("/profile", accountHandler.UpdateProfile)
+	protectedAccount.POST("/avatar", accountHandler.UploadAvatar)
 
 	return r
 }
