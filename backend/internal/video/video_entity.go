@@ -32,3 +32,7 @@ type OutboxMsg struct {
 type ListByAuthorIDRequest struct {
 	AuthorID uint `json:"author_id"`
 }
+type UpdateLikesCountRequest struct {
+	ID         uint  `json:"id"`
+	LikesCount int64 `json:"likes_count"`
+}
