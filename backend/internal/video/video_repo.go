@@ -29,3 +29,11 @@ func (vr *VideoRepository) ListByAuthorID(ctx context.Context, id int64) ([]Vide
 	}
 	return videos, nil
 }
+func (vr *VideoRepository) IsExist(ctx context.Context, id uint) (bool, error) {
+	var videoid Video
+	if err := vr.db.WithContext(ctx).First(&videoid, id).Error; err != nil {
+		return false, err
+	}
+	return true, nil
+}
+

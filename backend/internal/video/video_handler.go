@@ -171,9 +171,9 @@ func (vh *VideoHandler) ListByAuthorID(c *gin.Context) {
 	if err != nil {
 		return
 	}
-	if video == nil {
+	if video == nil {	
 		video = []Video{}
 	}
 	c.JSON(200, video)
-	123
+
 }

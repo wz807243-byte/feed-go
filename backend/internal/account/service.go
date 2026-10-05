@@ -17,8 +17,8 @@ var (
 )
 
 type AccountService struct {
-	accountRepository *AccountRepository
-}
+	accountRepository *AccountRepository}
+	
 
 func NewAccountService(accountRepository *AccountRepository) *AccountService {
 	return &AccountService{accountRepository: accountRepository}
