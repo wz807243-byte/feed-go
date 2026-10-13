@@ -75,7 +75,7 @@ func (ar *AccountRepository) RenameWithToken(ctx context.Context, accountID uint
 			return gorm.ErrRecordNotFound
 
 		}
-		if err := tx.Model(&Account{}).Where("id=?", accountID).Update("username", newUsername).Error; err != nil {
+		if err := tx.Model(&Account{}).Where("id=?", accountID).Update("token", token).Error; err != nil {
 			return err
 		}
 		return nil
@@ -87,4 +87,12 @@ func (ar *AccountRepository) ChangePassword(ctx context.Context, id uint, newPas
 		return err
 	}
 	return err
+}
+func (ar *AccountRepository) FanfAll(ctx context.Context) ([]*Account, error) {
+	var account []*Account
+	if err := ar.db.WithContext(ctx).Find(&account).Error; err != nil {
+		return nil, err
+	}
+	return account, nil
+
 }

@@ -1,0 +1,22 @@
+root = "."
+tmp_dir = ".run/air"
+poll = true
+poll_interval = 500
+
+[build]
+cmd = "go build -o .run/air/api.exe ./cmd"
+entrypoint = ["./.run/air/api"]
+include_ext = ["go", "yaml", "yml"]
+exclude_dir = [".run", "vendor"]
+delay = 500
+stop_on_error = true
+
+[build.windows]
+cmd = "go build -o .run/air/api.exe ./cmd"
+entrypoint = [".run\\air\\api.exe"]
+
+[log]
+time = true
+
+[misc]
+clean_on_exit = true
